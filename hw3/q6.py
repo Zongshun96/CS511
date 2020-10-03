@@ -29,9 +29,9 @@ s = Solver()
 
 
 
-# readin = "(1, 2, [ 2, 3, 4, 5 ])\n(2, 4, [ 1, 4 ])\n(3, 4, [ 1, 5 ])\n(4, 7, [ 1, 2, 5 ])\n(5, 7, [ 1, 3, 4 ])"
+readin = "(1, 2, [ 2, 3, 4, 5 ])\n(2, 4, [ 1, 4 ])\n(3, 4, [ 1, 5 ])\n(4, 7, [ 1, 2, 5 ])\n(5, 7, [ 1, 3, 4 ])"
 # readin = "(1, 2, [ 2 ])\n(2, 4, [ 1 ])"
-readin = "(1, 2, [ 2, 3 ])\n(2, 4, [ 1 ])\n(3, 4, [ 1 ])"
+# readin = "(1, 2, [ 2, 3 ])\n(2, 4, [ 1 ])\n(3, 4, [ 1, 2 ])"
 
 lineList = readin.split("\n")
 for i in range(len(lineList)):
@@ -43,18 +43,24 @@ print(len(lineList))
 #     print(name)
 #     print(chr(name+64))
 
-ParamList = [[i, Int(chr(i+64)),w, adjlist] for i,w,adjlist in lineList]
-for i1, p1, w1, adjlist in ParamList:
-    s.add(p1 == 1)
+# ParamList = [[i, Int(chr(i+64)),w, adjlist] for i,w,adjlist in lineList]
+# for i1, p1, w1, adjlist in ParamList:
+#     s.add(p1 == 1)
+#
+# CostFunc = Function('CostFunc', IntSort(), IntSort(), IntSort())
+# for i1, p1, w1, adjlist in ParamList:
+#     for i2 in adjlist:
+#         print(p1, ParamList[i2-1][1], p1 * w1 + ParamList[i2-1][1] * ParamList[i2-1][2])
+#         s.add(CostFunc(p1, ParamList[i2-1][1]) == p1 * w1 + ParamList[i2-1][1] * ParamList[i2-1][2])
+
+ParamList = [[i, Bool(chr(i+64)),w, adjlist] for i,w,adjlist in lineList]
+# for i1, p1, w1, adjlist in ParamList:
+#     s.add(p1 == 1)
 
 CostFunc = Function('CostFunc', IntSort(), IntSort(), IntSort())
 for i1, p1, w1, adjlist in ParamList:
     for i2 in adjlist:
-        print(p1, ParamList[i2-1][1], p1 * w1 + ParamList[i2-1][1] * ParamList[i2-1][2])
-        s.add(CostFunc(p1, ParamList[i2-1][1]) == p1 * w1 + ParamList[i2-1][1] * ParamList[i2-1][2])
-    # for i in range(len(lineList[i1][2])):
-        # s.add(CostFunc(p1[0], ParamList[lineList[i1-1][2][i]-1][1][0]) == p1[0]*w1+ParamList[lineList[i1-1][2][i]-1][1][0]*ParamList[lineList[i1-1][2][i]-1][2])
-
+        s.add(Implies(p1, ParamList[i2-1][1]))
 
 
 print(s.check())
