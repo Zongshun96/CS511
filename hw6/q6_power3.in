@@ -1,0 +1,16 @@
+
+assign(max_seconds,5).
+
+formulas(assumptions).
+    in_a0 = in_b0.
+    out_a0 = in_a0.
+    out_a1 = out_a0 * in_a0.
+    out_a2 = out_a1 * in_a0.
+    out_b0 = (in_b0 * in_b0) * in_b0.
+end_of_list.
+
+formulas(goals).
+
+    out_a2 = out_b0.
+
+end_of_list.
