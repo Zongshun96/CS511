@@ -8,7 +8,21 @@ s.set("model.completion", True)
 in_a    = 2
 m       = 1
 in_b    = 2
-n       = 5
+n       = 1
+
+workfile = input("Enter workfile:(default in_a=2; m=1; in_b=2; n=1)")
+try:
+    with open("./"+workfile) as f:
+        read_data = f.readline()
+        in_a = int(read_data)
+        read_data = f.readline()
+        m = int(read_data)
+        read_data = f.readline()
+        in_b = int(read_data)
+        read_data = f.readline()
+        n = int(read_data)
+except Exception as err:
+    print(err, "go with defualt settings")
 
 in_a_, in_b_ = Ints('in_a_ in_b_')
 
