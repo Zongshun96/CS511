@@ -1,11 +1,11 @@
 # please use the same format as in the sample lists, and make sure the working directory has the readin file
-# to run: python3 q5.py
+# to run: python3 q6.py
+# the solve step was adapted from the hw7 solution.
 
 
 import ast
 from z3 import *
-opt = Optimize() # find min
-
+opt = Solver()
 variable_d = {}
 neg_var_d = {}
 
@@ -17,16 +17,12 @@ c = [[0, 7, 1, 0, 8],
 [0, 4, 2, 0, 1],
 [8, 3, 6, 1, 0]]
 
-print(c)
-# try:
-#     filename = input("type the filename or use default input: ")
-#     with open("./"+filename, 'r') as f:
-#         input_list = ast.literal_eval(f.read())
-# except Exception as e:
-#     print(e)
-#     print("go with default")
-
-
+filename = sys.argv[1]
+with open(filename, "r") as f:
+    l1 = f.readline().split(" ", 2)[2]
+    w = eval(l1)
+    l2 = f.read().replace("\n", "").split(" ", 2)[2]
+    c = eval(l2)
 
 
 x_list = Ints(['x'+str(i) for i in range(len(w))])
@@ -53,8 +49,15 @@ exp = exp - (1+max(w))*temp
 
 
 
-opt.maximize(exp)
-check_result = opt.check()  
-print(check_result)
-print(check_result==sat)
-print(opt.model())
+# Objective function
+obj = Int("obj")
+opt.add(obj == exp)
+
+# Solve
+if opt.check() == unsat:
+	print("Unsatisfiable!")
+	quit()
+while opt.check() == sat:
+	model = opt.model()
+	opt.add(obj > model[obj])
+print(model)
