@@ -17,14 +17,14 @@ def MAP(CPTs, Os, Vs):
                 RV_prob_dict[entry[1][0]] = entry[2]
 
     step = 0
-    while not len(CPTs) == len(RV_dict):
+    while not len(CPTs) == len(RV_dict):  # make sure all RV are parsed
         for V,T in CPTs:
-            for entry in T: # base RV
+            for entry in T:
                 if not entry[0] == []:
                     depandancy = []
                     conditional_prob = 1
                     for dependants in entry[0]:
-                        if not dependants[0] in RV_dict:
+                        if not dependants[0] in RV_dict:    # in case some conditional RV hasn't been parsed
                             break
                         if dependants[1] == "1":
                             depandancy.append(RV_dict[dependants[0]] == 1)
@@ -62,9 +62,9 @@ def MAP(CPTs, Os, Vs):
     print(s.model())
 
 def MPE(CPTs, Os):
-    Vs = list(CPTs.keys())
-    Vs = [e for e in Vs if e not in Os]
-    MPE(CPTs, Os, Vs)
+    Vs = [item[0] for item in CPTs]
+    Vs = [e for e in Vs if e not in Os] # unobserved_RV_name_list
+    MAP(CPTs, Os, Vs)
 
 if __name__ == "__main__":
     CPTs = [["x", [[[],["x","1"],0.7], [[],["x","0"],0.3]]], 
