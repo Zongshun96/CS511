@@ -1,0 +1,14 @@
+formulas(assumptions). 
+    ((all x -R(x,c)) & (all x  exists y (R(x,y)) & (all x all y all z (-(y=z) -> -(R(x,y)&R(x,z)))))) -> (exists v exists w exists y (-(v = w) & R(v,y) & R(w,y))).
+end_of_list.
+
+formulas(goals).
+    ((all x -R(x,c)) & (all x  exists y (R(x,y)))) -> (exists v exists w exists y (-(v = w) & R(v,y) & R(w,y))).
+
+end_of_list.
+
+
+
+
+
+

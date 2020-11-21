@@ -1,0 +1,48 @@
+% 2020-06-30 Assaf Kfoury
+
+% EXERCISE: A quasigroup is an algebraic structure satisfying
+% 4 axioms. Adding 2 axioms for a two-sided identity e, we get
+% what is called a loop. Show that a quasigroup with a one-sided
+% identity is not necessarily a loop.
+
+% Usage:
+%    $ prover9 -f assaf_loop_1.in > assaf_loop_1.prover9.out
+% or
+%    $ prover9 < assaf_loop_1.in
+% or
+%    $ mace4 -c -f assaf_loop_1.in > assaf_loop_1.mace4.out
+
+% recommended parameters, none essential:
+
+% set(binary_resolution).
+% clear(print_initial_clauses).
+% clear(print_kept).
+% clear(print_given).
+% assign(max_seconds,5).
+% assign(stats,none).
+
+% commenting out any of the lines starting with "clear",
+% as well as changing the "stats" level, will produce more output.
+
+% running this script with mace4 will produce a counterexample:
+% a model satisfying the 4 axioms for quasigroups + 1 axiom for
+% the identity, but NOT the second axiom for the identity.
+
+formulas(assumptions).
+
+  % four axioms of quasigroup 
+
+  DL (y, M(y,x)) = x.   % standard notation in books: y \ (y * x) = x
+  M (y, DL(y,x)) = x.   %                             y * (y \ x) = x
+  DR (M(x,y), y) = x.   %                             (x * y) / y = x
+  M (DR(x,y), y) = x.   %                             (x / y) * y = x
+
+  M (e,x) = x.          %                             e * x = x
+ 
+end_of_list.
+
+formulas(goals).
+
+  M(x,e) = x.           %                             x * e = x             
+
+end_of_list.
