@@ -1,0 +1,36 @@
+% 2020-09-16 Script by Assaf Kfoury
+
+% after installing Prover9 and Mace4, you should be able to
+% execute this script.
+
+% run by executing command:
+%
+%    mace4 -c -f queens2_posting.in > queens2_posting.mace4.out
+% or
+%    mace4 -n8 -f queens2_posting.in > queens2_posting.mace4.out
+%
+
+set(arithmetic).
+
+formulas(assumptions).
+
+% n-Queens Puzzle
+%
+% Relation Q(x,y) means there is a queen at row x, column y.
+
+all x exists y Q(x,y).                              % Each row has >= 1 queen
+
+all x all y1 all y2 (Q(x,y1) & Q(x,y2) -> y1 = y2). % Each row has <= 1 queen
+
+% in the preceding wff we can omit all the outermost universal
+% quantifiers, just as in the three following wff's:
+
+Q(x1,y) & Q(x2,y) -> x1 = x2.                       % Each col has <= 1 queen
+
+Q(x1,y1) & Q(x2,y2) & (x2 + -x1 = y2 + -y1) -> x1 = x2 & y1 = y2.
+     % Each (-45 degree) diagonal has <= 1 queen
+
+Q(x1,y1) & Q(x2,y2) & (x1 + -x2 = y2 + -y1) -> x1 = x2 & y1 = y2.
+     % Each (+45 degree) antidiagonal has <= 1 queen
+
+end_of_list.

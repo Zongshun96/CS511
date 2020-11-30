@@ -1,0 +1,32 @@
+% prover9 < q5_d.in 
+
+op(400,infix,oplus).
+op(400,infix,otimes).
+op(400,infix,heytingarrow). % heyting arrow operator
+op(600,prefix,booleanalgebranot).   % Boolean Algebra unary not operator
+
+formulas(assumptions). 
+    % axims for a partial order
+    x <= x.
+    x <= y & y <= x -> x = y.
+    x <= y & y <= z -> x <= z.
+
+    % axioms for lattice
+    x <= Top.
+    Bot <= x.
+    z <= x otimes y <-> z <= x & z <= y.
+    x oplus y <= z <-> x <= z & y <= z.
+
+    % distributivity
+    (x oplus y) otimes z = (x otimes z) oplus (y otimes z).
+    (x otimes y) oplus z = (x oplus z) otimes (y oplus z).
+
+    % exists a complement
+    all x exists y (x oplus y = Top & x otimes y = Bot).
+
+end_of_list.
+
+formulas(goals).
+    % at most one complement
+    all x all y all w (x oplus y = Top & x otimes y = Bot) & (x oplus w = Top & x otimes w = Bot) -> (w = y).
+end_of_list.

@@ -1,0 +1,21 @@
+op(400,infix,oplus).
+op(400,infix,otimes).
+
+formulas(assumptions). 
+    x <= x.
+    x <= y & y <= x -> x = y.
+    x <= y & y <= z -> x <= z.
+
+    x <= Top.
+    Bot <= x.
+    z <= x otimes y <-> z <= x & z <= y.
+    x oplus y <= z <-> x <= z & y <= z.
+
+    (x oplus y) otimes z = (x otimes z) oplus (y otimes z).
+    (x otimes y) oplus z = (x oplus z) otimes (y oplus z).
+
+end_of_list.
+
+formulas(goals).
+    all x all y ((x oplus y = y oplus x) & (x otimes y = y otimes x)).
+end_of_list.

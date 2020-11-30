@@ -1,0 +1,31 @@
+% prover9 < q5_c.in 
+
+op(400,infix,oplus).
+op(400,infix,otimes).
+
+formulas(assumptions). 
+    % axims for a partial order
+    x <= x.
+    x <= y & y <= x -> x = y.
+    x <= y & y <= z -> x <= z.
+
+    % axioms for lattice
+    x <= Top.
+    Bot <= x.
+    z <= x otimes y <-> z <= x & z <= y.
+    x oplus y <= z <-> x <= z & y <= z.
+
+    % distributivity
+    (x oplus y) otimes z = (x otimes z) oplus (y otimes z).
+    (x otimes y) oplus z = (x oplus z) otimes (y oplus z).
+
+
+    % (C)
+    all x all y all z ((x <= (y oplus z)) -> ((x <= y) | (x <= z))).
+
+
+end_of_list.
+
+formulas(goals).
+    all x all y ((x <= y) | (y<= x)).
+end_of_list.
