@@ -1,4 +1,4 @@
-% prover9 < q5_c.in 
+% prover9 < q5_f.in 
 
 op(400,infix,oplus).
 op(400,infix,otimes).
@@ -13,8 +13,8 @@ formulas(assumptions).
     % axioms for lattice
     x <= Top.
     Bot <= x.
-    z <= x otimes y <-> z <= x & z <= y.
-    x oplus y <= z <-> x <= z & y <= z.
+    ((x oplus y) <= z) <-> ((x <= z) & (y <= z)).
+    (z <= (x otimes y)) <-> ((z <= x) & (z <= y)).
 
     % distributivity
     (x oplus y) otimes z = (x otimes z) oplus (y otimes z).
@@ -29,5 +29,5 @@ end_of_list.
 
 formulas(goals).
     % Heyting Algebra
-    exists x exists y exists z ((x otimes y) <= z) <-> (x <= (y heytingarrow z)).
+    all x all y all z ((x otimes y) <= z) <-> (x <= (y heytingarrow z)).
 end_of_list.

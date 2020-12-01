@@ -12,8 +12,8 @@ formulas(assumptions).
     % axioms for lattice
     x <= Top.
     Bot <= x.
-    z <= x otimes y <-> z <= x & z <= y.
-    x oplus y <= z <-> x <= z & y <= z.
+    ((x oplus y) <= z) <-> ((x <= z) & (y <= z)).
+    (z <= (x otimes y)) <-> ((z <= x) & (z <= y)).
 
     % distributivity
     (x oplus y) otimes z = (x otimes z) oplus (y otimes z).

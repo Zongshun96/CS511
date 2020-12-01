@@ -1,3 +1,5 @@
+% mace4 < q5_a.in 
+
 op(400,infix,oplus).
 op(400,infix,otimes).
 
@@ -8,8 +10,8 @@ formulas(assumptions).
 
     x <= Top.
     Bot <= x.
-    z <= x otimes y <-> z <= x & z <= y.
-    x oplus y <= z <-> x <= z & y <= z.
+    ((x oplus y) <= z) <-> ((x <= z) & (y <= z)).
+    (z <= (x otimes y)) <-> ((z <= x) & (z <= y)).
 
     (x oplus y) otimes z = (x otimes z) oplus (y otimes z).
     (x otimes y) oplus z = (x oplus z) otimes (y oplus z).
