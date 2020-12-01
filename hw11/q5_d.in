@@ -28,6 +28,7 @@ formulas(assumptions).
 
     % (D)
     (x heytingarrow y) = ((booleanalgebranot x) oplus y).
+    % (-x | y) = (x heytingarrow y).
 
 end_of_list.
 
