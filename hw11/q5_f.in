@@ -21,7 +21,7 @@ formulas(assumptions).
     (x otimes y) oplus z = (x oplus z) otimes (y oplus z).
 
 
-    % (C)
+    % (F)
     all x all y all z ((x <= y) | (x <= z)).
 
 

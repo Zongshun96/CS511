@@ -30,5 +30,5 @@ end_of_list.
 formulas(goals).
     % (G)
     all x x heytingarrow x = Top.
-    all x x otimes (x heytingarrow y) = x otimes y.
+    all x all y x otimes (x heytingarrow y) = x otimes y.
 end_of_list.
