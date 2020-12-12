@@ -1,4 +1,4 @@
-# python3 q5.py 4
+# python3 q6.py 4
 
 import functools
 import sys
@@ -7,7 +7,7 @@ import random
 import math
 
 if len(sys.argv) != 2:
-    print("usage: ", "python3 q5.py [n]")
+    print("usage: ", "python3 q6.py [n]")
     sys.exit()
 
 
