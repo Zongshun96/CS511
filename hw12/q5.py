@@ -13,8 +13,8 @@ if len(sys.argv) != 2:
 
 s = Solver()
 
-# n = int(sys.argv[1])
-n = 3
+n = int(sys.argv[1])
+# n = 3
 
 qboard = []
 for i in range(n):

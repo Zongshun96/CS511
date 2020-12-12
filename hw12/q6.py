@@ -13,8 +13,8 @@ if len(sys.argv) != 2:
 
 
 
-# n = int(sys.argv[1])
-n = 4
+n = int(sys.argv[1])
+# n = 4
 
 qboard = []
 for i in range(n):
